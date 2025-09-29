@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Marcadores Genéticos</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/alpinejs" defer></script>
+  <style>
+    .diagram { border: 1px solid #e5e7eb; background: white; padding: 12px; border-radius: 8px; }
+    .step { fill: #f8fafc; stroke: #94a3b8; stroke-width:1.5 }
+    .arrow { stroke: #334155; stroke-width:1.6; fill: none; marker-end: url(#arrowhead);} 
+  </style>
+</head>
+<body class="flex bg-gray-100 font-sans">
+  <!-- Sidebar -->
+  <aside class="w-64 bg-white h-screen shadow-lg p-4 overflow-y-auto sticky top-0" x-data="{open: {}}">
+    <h2 class="text-xl font-bold text-blue-700 mb-4">Marcadores Genéticos</h2>
+    <nav>
+      <ul class="space-y-2">
+        <li><a href="#morfo" class="text-gray-700 hover:text-blue-600">Morfológicos</a></li>
+        <li><a href="#bioq" class="text-gray-700 hover:text-blue-600">Bioquímicos</a></li>
+        <li>
+          <button @click="open.mol=!open.mol" class="w-full text-left text-gray-700 hover:text-blue-600 font-semibold">Moleculares</button>
+          <ul x-show="open.mol" class="pl-4 mt-2 space-y-1">
+            <li>
+              <button @click="open.baja=!open.baja" class="w-full text-left text-gray-600 hover:text-blue-600">Baja resolución</button>
+              <ul x-show="open.baja" class="pl-4 space-y-1">
+                <li><a href="#rflp" class="hover:text-blue-600">RFLP</a></li>
+                <li><a href="#rapd" class="hover:text-blue-600">RAPD</a></li>
+                <li><a href="#aflp" class="hover:text-blue-600">AFLP</a></li>
+                <li><a href="#ssr" class="hover:text-blue-600">SSR</a></li>
+                <li><a href="#issr" class="hover:text-blue-600">ISSR</a></li>
+                <li><a href="#scar" class="hover:text-blue-600">SCAR</a></li>
+                <li><a href="#caps" class="hover:text-blue-600">CAPS</a></li>
+              </ul>
+            </li>
+            <li>
+              <button @click="open.alta=!open.alta" class="w-full text-left text-gray-600 hover:text-blue-600">Alta resolución</button>
+              <ul x-show="open.alta" class="pl-4 space-y-1">
+                <li><a href="#snp" class="hover:text-blue-600">SNP</a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+  </aside>
+
+  <!-- Main content -->
+  <main class="flex-1 p-8 space-y-12 overflow-y-auto">
+    <section id="intro">
+      <h1 class="text-3xl font-bold text-blue-800 mb-4">Marcadores Genéticos</h1>
+      <p class="text-gray-700">Son variaciones heredables (en ADN, proteínas o características fenotípicas) que permiten diferenciar individuos, poblaciones o especies. Se usan en mejoramiento genético, biodiversidad, identificación y análisis de parentesco.</p>
+    </section>
+
+    <section id="morfo">
+      <h2 class="text-2xl font-semibold text-blue-700">1. Marcadores Morfológicos</h2>
+      <p class="mt-2 text-gray-700"><strong>Concepto:</strong> Características visibles como color de flor, altura, forma de semilla o pelaje.</p>
+      <p class="text-gray-700"><strong>Fundamento:</strong> Basados en la expresión fenotípica de genes. Fáciles de observar, pero influenciados por el ambiente.</p>
+    </section>
+
+    <section id="bioq">
+      <h2 class="text-2xl font-semibold text-blue-700">2. Marcadores Bioquímicos</h2>
+      <p class="mt-2 text-gray-700"><strong>Concepto:</strong> Variaciones en proteínas o metabolitos (isoenzimas, perfiles proteicos, metabolitos secundarios).</p>
+      <p class="text-gray-700"><strong>Fundamento:</strong> Reflejan diferencias en genes que codifican proteínas/metabolitos. Más resolutivos que los morfológicos, pero requieren laboratorio especializado.</p>
+    </section>
+
+    <section id="mol">
+      <h2 class="text-2xl font-semibold text-blue-700">3. Marcadores Moleculares</h2>
+      <p class="mt-2 text-gray-700"><strong>Concepto:</strong> Variaciones detectadas directamente en el ADN.</p>
+      <p class="text-gray-700"><strong>Fundamento:</strong> Basados en técnicas de biología molecular (PCR, secuenciación, enzimas de restricción).</p>
+
+      <!-- Baja resolución -->
+      <div class="mt-6">
+        <h3 class="text-xl font-semibold text-green-700">A) Baja resolución</h3>
+
+        <article id="rflp" class="mt-4">
+          <h4 class="text-lg font-bold text-gray-800">RFLP</h4>
+          <p><strong>Concepto:</strong> Diferencias en longitud de fragmentos de ADN por digestión enzimática.</p>
+          <p><strong>Fundamento:</strong> Mutaciones alteran sitios de restricción, generando fragmentos distintos.</p>
+          <p><strong>Procedimiento:</strong> Extracción de ADN → Digestión → Electroforesis → Southern blot → Hibridación con sondas.</p>
+          <div class="diagram mt-3">
+            <svg width="100%" height="120" viewBox="0 0 800 120" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+                  <polygon points="0 0, 10 3.5, 0 7" fill="#334155" />
+                </marker>
+              </defs>
+              <rect x="10" y="20" width="140" height="40" rx="6" class="step" />
+              <text x="80" y="45" font-size="12" text-anchor="middle" fill="#0f172a">ADN genómico</text>
+
+              <rect x="180" y="20" width="160" height="40" rx="6" class="step" />
+              <text x="260" y="45" font-size="12" text-anchor="middle" fill="#0f172a">Digestión (enzimas)</text>
+
+              <rect x="370" y="20" width="140" height="40" rx="6" class="step" />
+              <text x="440" y="45" font-size="12" text-anchor="middle" fill="#0f172a">Electroforesis</text>
+
+              <rect x="530" y="20" width="140" height="40" rx="6" class="step" />
+              <text x="600" y="45" font-size="12" text-anchor="middle" fill="#0f172a">Southern blot</text>
+
+              <path class="arrow" d="M150 40 L180 40" marker-end="url(#arrowhead)" />
+              <path class="arrow" d="M340 40 L370 40" marker-end="url(#arrowhead)" />
+              <path class="arrow" d="M510 40 L530 40" marker-end="url(#arrowhead)" />
+            </svg>
+          </div>
+        </article>
+
+        <article id="rapd" class="mt-4">
+          <h4 class="text-lg font-bold text-gray-800">RAPD</h4>
+          <p><strong>Concepto:</strong> Amplificación aleatoria de fragmentos de ADN con primers cortos.</p>
+          <p><strong>Procedimiento:</strong> ADN → PCR con primers arbitrarios → Electroforesis → Comparación de bandas.</p>
+          <div class="diagram mt-3">
+            <svg width="100%" height="120" viewBox="0 0 700 120" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <marker id="arrowhead2" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+                  <polygon points="0 0, 10 3.5, 0 7" fill="#334155" />
+                </marker>
+              </defs>
+              <rect x="10" y="20" width="140" height="40" rx="6" class="step" />
+              <text x="80" y="45" font-size="12" text-anchor="middle" fill="#0f172a">ADN</text>
+
+              <rect x="190" y="20" width="160" height="40" rx="6" class="step" />
+              <text x="270" y="45" font-size="12" text-anchor="middle" fill="#0f172a">PCR (primers aleatorios)</text>
+
+              <rect x="400" y="20" width="140" height="40" rx="6" class="step" />
+              <text x="470" y="45" font-size="12" text-anchor="middle" fill="#0f172a">Electroforesis</text>
+
+              <path class="arrow" d="M150 40 L190 40" marker-end="url(#arrowhead2)" />
+              <path class="arrow" d="M350 40 L400 40" marker-end="url(#arrowhead2)" />
+            </svg>
+          </div>
+        </article>
+
+        <article id="aflp" class="mt-4">
+          <h4 class="text-lg font-bold text-gray-800">AFLP</h4>
+          <p><strong>Concepto:</strong> Combina digestión enzimática y PCR selectiva.</p>
+          <p><strong>Procedimiento:</strong> ADN → Digestión → Ligación de adaptadores → PCR selectiva → Electroforesis capilar.</p>
+          <div class="diagram mt-3">
+            <svg width="100%" height="140" viewBox="0 0 820 140" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <marker id="arrowhead3" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+                  <polygon points="0 0, 10 3.5, 0 7" fill="#334155" />
+                </marker>
+              </defs>
+              <rect x="10" y="30" width="140" height="40" rx="6" class="step" />
+              <text x="80" y="55" font-size="12" text-anchor="middle" fill="#0f172a">ADN</text>
+
+              <rect x="180" y="30" width="160" height="40" rx="6" class="step" />
+              <text x="260" y="55" font-size="12" text-anchor="middle" fill="#0f172a">Digestión (enzimas)</text>
+
+              <rect x="370" y="30" width="160" height="40" rx="6" class="step" />
+              <text x="450" y="55" font-size="12" text-anchor="middle" fill="#0f172a">Ligación de adaptadores</text>
+
+              <rect x="560" y="30" width="160" height="40" rx="6" class="step" />
+              <text x="640" y="55" font-size="12" text-anchor="middle" fill="#0f172a">PCR selectiva</text>
+
+              <rect x="740" y="30" width="60" height="40" rx="6" class="step" />
+              <text x="770" y="55" font-size="10" text-anchor="middle" fill="#0f172a">Capilar</text>
+
+              <path class="arrow" d="M150 50 L180 50" marker-end="url(#arrowhead3)" />
+              <path class="arrow" d="M340 50 L370 50" marker-end="url(#arrowhead3)" />
+              <path class="arrow" d="M530 50 L560 50" marker-end="url(#arrowhead3)" />
+              <path class="arrow" d="M720 50 L740 50" marker-end="url(#arrowhead3)" />
+            </svg>
+          </div>
+        </article>
+
+        <article id="ssr" class="mt-4">
+          <h4 class="text-lg font-bold text-gray-800">SSR (Microsatélites)</h4>
+          <p><strong>Concepto:</strong> Secuencias cortas repetidas en tándem; el número de repeticiones varía entre individuos.</p>
+          <p><strong>Procedimiento:</strong> Diseñar primers flanqueantes → PCR → Análisis de tamaño en gel o electroforesis capilar.</p>
+          <div class="diagram mt-3">
+            <svg width="100%" height="120" viewBox="0 0 700 120" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <marker id="arrowhead4" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+                  <polygon points="0 0, 10 3.5, 0 7" fill="#334155" />
+                </marker>
+              </defs>
+              <rect x="10" y="30" width="160" height="40" rx="6" class="step" />
+              <text x="90" y="55" font-size="12" text-anchor="middle" fill="#0f172a">ADN (región con SSR)</text>
+
+              <rect x="220" y="30" width="160" height="40" rx="6" class="step" />
+              <text x="300" y="55" font-size="12" text-anchor="middle" fill="#0f172a">PCR con primers flanqueantes</text>
+
+              <rect x="440" y="30" width="120" height="40" rx="6" class="step" />
+              <text x="500" y="55" font-size="12" text-anchor="middle" fill="#0f172a">Electroforesis / Capilar</text>
+
+              <path class="arrow" d="M170 50 L220 50" marker-end="url(#arrowhead4)" />
+              <path class="arrow" d="M380 50 L440 50" marker-end="url(#arrowhead4)" />
+            </svg>
+          </div>
+        </article>
+
+        <article id="issr" class="mt-4">
+          <h4 class="text-lg font-bold text-gray-800">ISSR</h4>
+          <p><strong>Concepto:</strong> Amplificación de regiones entre microsatélites usando primers específicos.</p>
+          <p><strong>Procedimiento:</strong> PCR con primers basados en repeticiones → Electroforesis → Análisis de bandas.</p>
+        </article>
+
+        <article id="scar" class="mt-4">
+          <h4 class="text-lg font-bold text-gray-800">SCAR</h4>
+          <p><strong>Concepto:</strong> Secuencias derivadas de RAPD/AFLP convertidas en marcadores específicos y reproducibles.</p>
+          <p><strong>Procedimiento:</strong> Secuenciar fragmento polimórfico → Diseñar primers → PCR específica → Detección.</p>
+        </article>
+
+        <article id="caps" class="mt-4">
+          <h4 class="text-lg font-bold text-gray-800">CAPS</h4>
+          <p><strong>Concepto:</strong> PCR seguida de digestión enzimática para revelar polimorfismos.</p>
+          <p><strong>Procedimiento:</strong> PCR → Digestión con enzimas → Electroforesis → Interpretación de patrones.</p>
+        </article>
+      </div>
+
+      <!-- Alta resolución -->
+      <div class="mt-6">
+        <h3 class="text-xl font-semibold text-green-700">B) Alta resolución</h3>
+
+        <article id="snp" class="mt-4">
+          <h4 class="text-lg font-bold text-gray-800">SNP</h4>
+          <p><strong>Concepto:</strong> Variación en un solo nucleótido del ADN.</p>
+          <p><strong>Fundamento:</strong> Polimorfismos abundantes detectables por secuenciación o sondas.</p>
+          <p><strong>Procedimiento:</strong> ADN → Secuenciación (NGS o Sanger) / Microarreglos / PCR en tiempo real → Llamado de variantes.</p>
+          <div class="diagram mt-3">
+            <svg width="100%" height="140" viewBox="0 0 760 140" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <marker id="arrowhead5" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+                  <polygon points="0 0, 10 3.5, 0 7" fill="#334155" />
+                </marker>
+              </defs>
+              <rect x="10" y="30" width="160" height="40" rx="6" class="step" />
+              <text x="90" y="55" font-size="12" text-anchor="middle" fill="#0f172a">ADN</text>
+
+              <rect x="200" y="30" width="200" height="40" rx="6" class="step" />
+              <text x="300" y="55" font-size="12" text-anchor="middle" fill="#0f172a">Secuenciación / Microarray</text>
+
+              <rect x="430" y="30" width="200" height="40" rx="6" class="step" />
+              <text x="530" y="55" font-size="12" text-anchor="middle" fill="#0f172a">Llamado de variantes (SNP)</text>
+
+              <path class="arrow" d="M170 50 L200 50" marker-end="url(#arrowhead5)" />
+              <path class="arrow" d="M400 50 L430 50" marker-end="url(#arrowhead5)" />
+            </svg>
+          </div>
+        </article>
+      </div>
+    </section>
+  </main>
+</body>
+</html>
